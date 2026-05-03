@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Периодическая таблица элементов</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>Периодическая таблица элементов</h1>
+    <div class="controls">
+      <button id="darkMode" title="Тёмная тема">🌙</button>
+      <button id="simpleView" class="active">Простой</button>
+      <button id="namesView">Названия</button>
+      <button id="configView">Эл. конфиг</button>
+      <select id="propertySelect">
+        <option value="weight">Атомная масса</option>
+        <option value="radius">Атомный радиус</option>
+        <option value="electronegativity">Электроотрицательность</option>
+        <option value="density">Плотность</option>
+        <option value="melting">Темп. плавления</option>
+        <option value="boiling">Темп. кипения</option>
+      </select>
+      <div class="temp-slider">
+        <label>Температура: <span id="tempValue">25</span>°C</label>
+        <input type="range" id="tempSlider" min="-273" max="5000" value="25">
+      </div>
+    </div>
+  </header>
+  <div class="main-content">
+    <div class="table-container" id="tableContainer"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="element-detail" id="elementDetail">
+        <p>Наведите на элемент для просмотра информации</p>
+      </div>
+    </aside>
+  </div>
+</div>
+<script src="elements-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
