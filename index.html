@@ -3,33 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Таблица Менделеева</title>
+<title>Периодическая таблица элементов</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
   <header>
-    <h1>ПЕРИОДИЧЕСКАЯ ТАБЛИЦА ЭЛЕМЕНТОВ</h1>
+    <div class="title-row">
+      <h1>ПЕРИОДИЧЕСКАЯ ТАБЛИЦА ЭЛЕМЕНТОВ</h1>
+      <button id="btnDark">🌙</button>
+    </div>
     <div class="toolbar">
-      <div class="view-btns">
+      <div class="btn-group">
         <button id="btnSimple" class="active">Простая</button>
         <button id="btnNames">Названия</button>
-        <button id="btnConfig">Конфигурация</button>
+        <button id="btnConfig">Конфиг</button>
       </div>
       <select id="propSelect">
-        <option value="weight">Атомная масса</option>
+        <option value="weight">Масса</option>
         <option value="radius">Радиус</option>
         <option value="en">ЭО</option>
         <option value="density">Плотность</option>
-        <option value="melt">T° плавл.</option>
-        <option value="boil">T° кип.</option>
+        <option value="melt">T°пл</option>
+        <option value="boil">T°кип</option>
         <option value="state">Состояние</option>
       </select>
       <div class="temp-wrap" id="tempWrap" style="display:none">
         <span id="tempLabel">25°C</span>
         <input type="range" id="tempSlider" min="-273" max="3000" value="25">
       </div>
-      <button id="btnDark" title="Тёмная тема">🌙</button>
     </div>
   </header>
   <div class="content">
