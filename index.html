@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +68,7 @@ body.dark #detail h2 { border-color:#555; }
   <header>
     <div class="title-row">
       <h1>PERIODIC TABLE</h1>
-      <button id="btnDark">🌙</button>
+      <button id="btnDark">&#127769;</button>
     </div>
     <div class="toolbar">
       <div class="btn-group">
@@ -77,16 +77,16 @@ body.dark #detail h2 { border-color:#555; }
         <button id="btnConfig">Config</button>
       </div>
       <select id="propSelect">
-        <option value="weight">Weight</option>
-        <option value="radius">Radius</option>
-        <option value="electronegativity">EN</option>
-        <option value="density">Density</option>
-        <option value="melt">Melt</option>
-        <option value="boil">Boil</option>
+        <option value="w">Weight</option>
+        <option value="r">Radius</option>
+        <option value="en">EN</option>
+        <option value="d">Density</option>
+        <option value="m">Melt</option>
+        <option value="b">Boil</option>
         <option value="state">State</option>
       </select>
       <div class="temp-wrap" id="tempWrap" style="display:none">
-        <span id="tempLabel">25°C</span>
+        <span id="tempLabel">25C</span>
         <input type="range" id="tempSlider" min="-273" max="3000" value="25">
       </div>
     </div>
@@ -100,124 +100,124 @@ body.dark #detail h2 { border-color:#555; }
 </div>
 <script>
 var ELEMENTS = [
-{num:1,sym:"H",name_ru:"Водород",weight:1.008,category:"nonmetal",config:"1s¹",radius:53,en:2.20,density:0.0000899,melt:-259.2,boil:-252.9},
-{num:2,sym:"He",name_ru:"Гелий",weight:4.003,category:"noble-gas",config:"1s²",radius:31,en:null,density:0.000179,melt:-272.2,boil:-268.9},
-{num:3,sym:"Li",name_ru:"Литий",weight:6.941,category:"alkali-metal",config:"[He]2s¹",radius:167,en:0.98,density:0.534,melt:180.5,boil:1342},
-{num:4,sym:"Be",name_ru:"Бериллий",weight:9.012,category:"alkaline-earth",config:"[He]2s²",radius:112,en:1.57,density:1.85,melt:1287,boil:2470},
-{num:5,sym:"B",name_ru:"Бор",weight:10.81,category:"metalloid",config:"[He]2s²2p¹",radius:87,en:2.04,density:2.34,melt:2076,boil:3927},
-{num:6,sym:"C",name_ru:"Углерод",weight:12.01,category:"nonmetal",config:"[He]2s²2p²",radius:77,en:2.55,density:2.27,melt:3550,boil:4027},
-{num:7,sym:"N",name_ru:"Азот",weight:14.01,category:"nonmetal",config:"[He]2s²2p³",radius:75,en:3.04,density:0.00125,melt:-210.0,boil:-195.8},
-{num:8,sym:"O",name_ru:"Кислород",weight:16.00,category:"nonmetal",config:"[He]2s²2p⁴",radius:73,en:3.44,density:0.00143,melt:-218.8,boil:-183.0},
-{num:9,sym:"F",name_ru:"Фтор",weight:19.00,category:"halogen",config:"[He]2s²2p⁵",radius:71,en:3.98,density:0.0017,melt:-219.7,boil:-188.1},
-{num:10,sym:"Ne",name_ru:"Неон",weight:20.18,category:"noble-gas",config:"[He]2s²2p⁶",radius:69,en:null,density:0.0009,melt:-248.6,boil:-246.1},
-{num:11,sym:"Na",name_ru:"Натрий",weight:22.99,category:"alkali-metal",config:"[Ne]3s¹",radius:190,en:0.93,density:0.97,melt:97.8,boil:883},
-{num:12,sym:"Mg",name_ru:"Магний",weight:24.31,category:"alkaline-earth",config:"[Ne]3s²",radius:145,en:1.31,density:1.74,melt:650,boil:1091},
-{num:13,sym:"Al",name_ru:"Алюминий",weight:26.98,category:"basic-metal",config:"[Ne]3s²3p¹",radius:118,en:1.61,density:2.70,melt:660.3,boil:2519},
-{num:14,sym:"Si",name_ru:"Кремень",weight:28.09,category:"metalloid",config:"[Ne]3s²3p²",radius:111,en:1.90,density:2.33,melt:1414,boil:3265},
-{num:15,sym:"P",name_ru:"Фосфор",weight:30.97,category:"nonmetal",config:"[Ne]3s²3p³",radius:98,en:2.19,density:1.82,melt:44.2,boil:280.5},
-{num:16,sym:"S",name_ru:"Сера",weight:32.07,category:"nonmetal",config:"[Ne]3s²3p⁴",radius:88,en:2.58,density:2.07,melt:115.2,boil:444.7},
-{num:17,sym:"Cl",name_ru:"Хлор",weight:35.45,category:"halogen",config:"[Ne]3s²3p⁵",radius:79,en:3.16,density:0.0032,melt:-101.5,boil:-34.0},
-{num:18,sym:"Ar",name_ru:"Аргон",weight:39.95,category:"noble-gas",config:"[Ne]3s²3p⁶",radius:71,en:null,density:0.0018,melt:-189.3,boil:-185.8},
-{num:19,sym:"K",name_ru:"Калий",weight:39.10,category:"alkali-metal",config:"[Ar]4s¹",radius:243,en:0.82,density:0.86,melt:63.4,boil:759},
-{num:20,sym:"Ca",name_ru:"Кальций",weight:40.08,category:"alkaline-earth",config:"[Ar]4s²",radius:194,en:1.00,density:1.55,melt:842,boil:1484},
-{num:21,sym:"Sc",name_ru:"Скандий",weight:44.96,category:"transition-metal",config:"[Ar]3d¹4s²",radius:184,en:1.36,density:2.99,melt:1541,boil:2836},
-{num:22,sym:"Ti",name_ru:"Титан",weight:47.87,category:"transition-metal",config:"[Ar]3d²4s²",radius:176,en:1.54,density:4.51,melt:1668,boil:3287},
-{num:23,sym:"V",name_ru:"Ванадий",weight:50.94,category:"transition-metal",config:"[Ar]3d³4s²",radius:171,en:1.63,density:6.11,melt:1910,boil:3407},
-{num:24,sym:"Cr",name_ru:"Хром",weight:52.00,category:"transition-metal",config:"[Ar]3d⁵4s¹",radius:166,en:1.66,density:7.19,melt:1907,boil:2671},
-{num:25,sym:"Mn",name_ru:"Марганец",weight:54.94,category:"transition-metal",config:"[Ar]3d⁵4s²",radius:161,en:1.55,density:7.43,melt:1246,boil:2061},
-{num:26,sym:"Fe",name_ru:"Железо",weight:55.85,category:"transition-metal",config:"[Ar]3d⁶4s²",radius:156,en:1.83,density:7.87,melt:1538,boil:2862},
-{num:27,sym:"Co",name_ru:"Кобальт",weight:58.93,category:"transition-metal",config:"[Ar]3d⁷4s²",radius:152,en:1.88,density:8.90,melt:1495,boil:2927},
-{num:28,sym:"Ni",name_ru:"Никель",weight:58.69,category:"transition-metal",config:"[Ar]3d⁸4s²",radius:149,en:1.91,density:8.91,melt:1455,boil:2913},
-{num:29,sym:"Cu",name_ru:"Медь",weight:63.55,category:"transition-metal",config:"[Ar]3d¹⁰4s¹",radius:145,en:1.90,density:8.96,melt:1085,boil:2562},
-{num:30,sym:"Zn",name_ru:"Цинк",weight:65.38,category:"transition-metal",config:"[Ar]3d¹⁰4s²",radius:142,en:1.65,density:7.14,melt:419.5,boil:907},
-{num:31,sym:"Ga",name_ru:"Галлий",weight:69.72,category:"basic-metal",config:"[Ar]3d¹⁰4s²4p¹",radius:136,en:1.81,density:5.91,melt:29.8,boil:2204},
-{num:32,sym:"Ge",name_ru:"Германий",weight:72.63,category:"metalloid",config:"[Ar]3d¹⁰4s²4p²",radius:125,en:2.01,density:5.32,melt:938.3,boil:2833},
-{num:33,sym:"As",name_ru:"Мышьяк",weight:74.92,category:"metalloid",config:"[Ar]3d¹⁰4s²4p³",radius:114,en:2.18,density:5.73,melt:817,boil:614},
-{num:34,sym:"Se",name_ru:"Селен",weight:78.97,category:"nonmetal",config:"[Ar]3d¹⁰4s²4p⁴",radius:103,en:2.55,density:4.81,melt:221,boil:685},
-{num:35,sym:"Br",name_ru:"Бром",weight:79.90,category:"halogen",config:"[Ar]3d¹⁰4s²4p⁵",radius:94,en:2.96,density:3.12,melt:-7.2,boil:59},
-{num:36,sym:"Kr",name_ru:"Криптон",weight:83.80,category:"noble-gas",config:"[Ar]3d¹⁰4s²4p⁶",radius:88,en:3.00,density:0.0037,melt:-157.4,boil:-153.2},
-{num:37,sym:"Rb",name_ru:"Рубидий",weight:85.47,category:"alkali-metal",config:"[Kr]5s¹",radius:265,en:0.82,density:1.53,melt:39.3,boil:688},
-{num:38,sym:"Sr",name_ru:"Стронций",weight:87.62,category:"alkaline-earth",config:"[Kr]5s²",radius:219,en:0.95,density:2.63,melt:777,boil:1382},
-{num:39,sym:"Y",name_ru:"Иттрий",weight:88.91,category:"transition-metal",config:"[Kr]4d¹5s²",radius:212,en:1.22,density:4.47,melt:1526,boil:3345},
-{num:40,sym:"Zr",name_ru:"Цирконий",weight:91.22,category:"transition-metal",config:"[Kr]4d²5s²",radius:206,en:1.33,density:6.51,melt:1855,boil:4409},
-{num:41,sym:"Nb",name_ru:"Ниобий",weight:92.91,category:"transition-metal",config:"[Kr]4d⁴5s¹",radius:198,en:1.60,density:8.57,melt:2477,boil:4744},
-{num:42,sym:"Mo",name_ru:"Молибден",weight:95.95,category:"transition-metal",config:"[Kr]4d⁵5s¹",radius:190,en:2.16,density:10.22,melt:2623,boil:4639},
-{num:43,sym:"Tc",name_ru:"Технеций",weight:98.00,category:"transition-metal",config:"[Kr]4d⁵5s²",radius:183,en:1.90,density:11.5,melt:2157,boil:4265},
-{num:44,sym:"Ru",name_ru:"Рутений",weight:101.1,category:"transition-metal",config:"[Kr]4d⁷5s¹",radius:178,en:2.20,density:12.37,melt:2334,boil:4150},
-{num:45,sym:"Rh",name_ru:"Родий",weight:102.9,category:"transition-metal",config:"[Kr]4d⁸5s¹",radius:173,en:2.28,density:12.41,melt:1964,boil:3695},
-{num:46,sym:"Pd",name_ru:"Палладий",weight:106.4,category:"transition-metal",config:"[Kr]4d¹⁰",radius:169,en:2.20,density:12.02,melt:1555,boil:2963},
-{num:47,sym:"Ag",name_ru:"Серебро",weight:107.9,category:"transition-metal",config:"[Kr]4d¹⁰5s¹",radius:165,en:1.93,density:10.49,melt:961.8,boil:2162},
-{num:48,sym:"Cd",name_ru:"Кадмий",weight:112.4,category:"transition-metal",config:"[Kr]4d¹⁰5s²",radius:161,en:1.69,density:8.65,melt:321.1,boil:767},
-{num:49,sym:"In",name_ru:"Индий",weight:114.8,category:"basic-metal",config:"[Kr]4d¹⁰5s²5p¹",radius:156,en:1.78,density:7.31,melt:156.6,boil:2072},
-{num:50,sym:"Sn",name_ru:"Олово",weight:118.7,category:"basic-metal",config:"[Kr]4d¹⁰5s²5p²",radius:145,en:1.96,density:7.29,melt:231.9,boil:2602},
-{num:51,sym:"Sb",name_ru:"Сурьма",weight:121.8,category:"metalloid",config:"[Kr]4d¹⁰5s²5p³",radius:133,en:2.05,density:6.69,melt:630.6,boil:1587},
-{num:52,sym:"Te",name_ru:"Теллур",weight:127.6,category:"metalloid",config:"[Kr]4d¹⁰5s²5p⁴",radius:123,en:2.10,density:6.24,melt:449.5,boil:988},
-{num:53,sym:"I",name_ru:"Иод",weight:126.9,category:"halogen",config:"[Kr]4d¹⁰5s²5p⁵",radius:115,en:2.66,density:4.93,melt:113.7,boil:184.3},
-{num:54,sym:"Xe",name_ru:"Ксенон",weight:131.3,category:"noble-gas",config:"[Kr]4d¹⁰5s²5p⁶",radius:108,en:2.60,density:0.0059,melt:-111.8,boil:-108.1},
-{num:55,sym:"Cs",name_ru:"Цезий",weight:132.9,category:"alkali-metal",config:"[Xe]6s¹",radius:298,en:0.79,density:1.87,melt:28.4,boil:671},
-{num:56,sym:"Ba",name_ru:"Барий",weight:137.3,category:"alkaline-earth",config:"[Xe]6s²",radius:253,en:0.89,density:3.59,melt:727,boil:1897},
-{num:57,sym:"La",name_ru:"Лантан",weight:138.9,category:"lanthanide",config:"[Xe]5d¹6s²",radius:195,en:1.10,density:6.15,melt:920,boil:3464},
-{num:58,sym:"Ce",name_ru:"Церий",weight:140.1,category:"lanthanide",config:"[Xe]4f¹5d¹6s²",radius:185,en:1.12,density:6.77,melt:795,boil:3443},
-{num:59,sym:"Pr",name_ru:"Празеодим",weight:140.9,category:"lanthanide",config:"[Xe]4f³6s²",radius:185,en:1.13,density:6.77,melt:931,boil:3520},
-{num:60,sym:"Nd",name_ru:"Неодим",weight:144.2,category:"lanthanide",config:"[Xe]4f⁴6s²",radius:185,en:1.14,density:7.01,melt:1024,boil:3074},
-{num:61,sym:"Pm",name_ru:"Прометий",weight:145.0,category:"lanthanide",config:"[Xe]4f⁵6s²",radius:185,en:1.13,density:7.26,melt:1042,boil:3000},
-{num:62,sym:"Sm",name_ru:"Самарий",weight:150.4,category:"lanthanide",config:"[Xe]4f⁶6s²",radius:185,en:1.17,density:7.52,melt:1072,boil:1794},
-{num:63,sym:"Eu",name_ru:"Европий",weight:152.0,category:"lanthanide",config:"[Xe]4f⁷6s²",radius:185,en:1.20,density:5.24,melt:822,boil:1529},
-{num:64,sym:"Gd",name_ru:"Гадолиний",weight:157.3,category:"lanthanide",config:"[Xe]4f⁷5d¹6s²",radius:185,en:1.20,density:7.90,melt:1313,boil:3273},
-{num:65,sym:"Tb",name_ru:"Тербий",weight:158.9,category:"lanthanide",config:"[Xe]4f⁹6s²",radius:185,en:1.22,density:8.23,melt:1356,boil:3230},
-{num:66,sym:"Dy",name_ru:"Диспрозий",weight:162.5,category:"lanthanide",config:"[Xe]4f¹⁰6s²",radius:185,en:1.23,density:8.55,melt:1412,boil:2567},
-{num:67,sym:"Ho",name_ru:"Гольмий",weight:164.9,category:"lanthanide",config:"[Xe]4f¹¹6s²",radius:185,en:1.24,density:8.80,melt:1474,boil:2700},
-{num:68,sym:"Er",name_ru:"Эрбий",weight:167.3,category:"lanthanide",config:"[Xe]4f¹²6s²",radius:185,en:1.24,density:9.07,melt:1529,boil:2868},
-{num:69,sym:"Tm",name_ru:"Тулий",weight:168.9,category:"lanthanide",config:"[Xe]4f¹³6s²",radius:185,en:1.25,density:9.32,melt:1545,boil:1950},
-{num:70,sym:"Yb",name_ru:"Иттербий",weight:173.0,category:"lanthanide",config:"[Xe]4f¹⁴6s²",radius:185,en:1.10,density:6.97,melt:824,boil:1196},
-{num:71,sym:"Lu",name_ru:"Лютеций",weight:175.0,category:"lanthanide",config:"[Xe]4f¹⁴5d¹6s²",radius:185,en:1.27,density:9.84,melt:1663,boil:3402},
-{num:72,sym:"Hf",name_ru:"Гафний",weight:178.5,category:"transition-metal",config:"[Xe]4f¹⁴5d²6s²",radius:175,en:1.30,density:13.31,melt:2233,boil:4603},
-{num:73,sym:"Ta",name_ru:"Тантал",weight:180.9,category:"transition-metal",config:"[Xe]4f¹⁴5d³6s²",radius:170,en:1.50,density:16.65,melt:3017,boil:5458},
-{num:74,sym:"W",name_ru:"Вольфрам",weight:183.8,category:"transition-metal",config:"[Xe]4f¹⁴5d⁴6s²",radius:165,en:2.36,density:19.25,melt:3422,boil:5555},
-{num:75,sym:"Re",name_ru:"Рений",weight:186.2,category:"transition-metal",config:"[Xe]4f¹⁴5d⁵6s²",radius:160,en:1.90,density:21.02,melt:3186,boil:5596},
-{num:76,sym:"Os",name_ru:"Осмий",weight:190.2,category:"transition-metal",config:"[Xe]4f¹⁴5d⁶6s²",radius:155,en:2.20,density:22.59,melt:3033,boil:5012},
-{num:77,sym:"Ir",name_ru:"Иридий",weight:192.2,category:"transition-metal",config:"[Xe]4f¹⁴5d⁷6s²",radius:150,en:2.20,density:22.56,melt:2446,boil:4428},
-{num:78,sym:"Pt",name_ru:"Платина",weight:195.1,category:"transition-metal",config:"[Xe]4f¹⁴5d⁹6s¹",radius:150,en:2.28,density:21.46,melt:1768,boil:3825},
-{num:79,sym:"Au",name_ru:"Золото",weight:197.0,category:"transition-metal",config:"[Xe]4f¹⁴5d¹⁰6s¹",radius:150,en:2.54,density:19.30,melt:1064,boil:2856},
-{num:80,sym:"Hg",name_ru:"Ртуть",weight:200.6,category:"transition-metal",config:"[Xe]4f¹⁴5d¹⁰6s²",radius:150,en:2.00,density:13.53,melt:-38.8,boil:356.7},
-{num:81,sym:"Tl",name_ru:"Таллий",weight:204.4,category:"basic-metal",config:"[Xe]4f¹⁴5d¹⁰6s²6p¹",radius:150,en:1.62,density:11.85,melt:304,boil:1473},
-{num:82,sym:"Pb",name_ru:"Свинец",weight:207.2,category:"basic-metal",config:"[Xe]4f¹⁴5d¹⁰6s²6p²",radius:150,en:1.87,density:11.34,melt:327.5,boil:1749},
-{num:83,sym:"Bi",name_ru:"Висмут",weight:209.0,category:"basic-metal",config:"[Xe]4f¹⁴5d¹⁰6s²6p³",radius:150,en:2.02,density:9.75,melt:271.4,boil:1564},
-{num:84,sym:"Po",name_ru:"Полоний",weight:209.0,category:"metalloid",config:"[Xe]4f¹⁴5d¹⁰6s²6p⁴",radius:150,en:2.00,density:9.20,melt:254,boil:962},
-{num:85,sym:"At",name_ru:"Астат",weight:210.0,category:"halogen",config:"[Xe]4f¹⁴5d¹⁰6s²6p⁵",radius:150,en:2.20,density:7.00,melt:302,boil:337},
-{num:86,sym:"Rn",name_ru:"Радон",weight:222.0,category:"noble-gas",config:"[Xe]4f¹⁴5d¹⁰6s²6p⁶",radius:150,en:null,density:0.0097,melt:-71,boil:-61.7},
-{num:87,sym:"Fr",name_ru:"Франций",weight:223.0,category:"alkali-metal",config:"[Rn]7s¹",radius:260,en:0.70,density:1.87,melt:27,boil:677},
-{num:88,sym:"Ra",name_ru:"Радий",weight:226.0,category:"alkaline-earth",config:"[Rn]7s²",radius:221,en:0.90,density:5.50,melt:696,boil:1737},
-{num:89,sym:"Ac",name_ru:"Актиний",weight:227.0,category:"actinide",config:"[Rn]6d¹7s²",radius:195,en:1.10,density:10.07,melt:1050,boil:3198},
-{num:90,sym:"Th",name_ru:"Торий",weight:232.0,category:"actinide",config:"[Rn]6d²7s²",radius:180,en:1.30,density:11.72,melt:1750,boil:4788},
-{num:91,sym:"Pa",name_ru:"Протактиний",weight:231.0,category:"actinide",config:"[Rn]5f²6d¹7s²",radius:180,en:1.50,density:15.37,melt:1572,boil:4027},
-{num:92,sym:"U",name_ru:"Уран",weight:238.0,category:"actinide",config:"[Rn]5f³6d¹7s²",radius:175,en:1.38,density:18.95,melt:1135,boil:4131},
-{num:93,sym:"Np",name_ru:"Нептуний",weight:237.0,category:"actinide",config:"[Rn]5f⁴6d¹7s²",radius:175,en:1.36,density:20.45,melt:644,boil:3902},
-{num:94,sym:"Pu",name_ru:"Плутоний",weight:244.0,category:"actinide",config:"[Rn]5f⁶7s²",radius:175,en:1.28,density:19.82,melt:640,boil:3228},
-{num:95,sym:"Am",name_ru:"Америций",weight:243.0,category:"actinide",config:"[Rn]5f⁷7s²",radius:175,en:1.13,density:13.69,melt:1176,boil:2011},
-{num:96,sym:"Cm",name_ru:"Кюрий",weight:247.0,category:"actinide",config:"[Rn]5f⁷6d¹7s²",radius:175,en:1.28,density:13.51,melt:1345,boil:3110},
-{num:97,sym:"Bk",name_ru:"Берклий",weight:247.0,category:"actinide",config:"[Rn]5f⁹7s²",radius:175,en:1.30,density:14.79,melt:1050,boil:2627},
-{num:98,sym:"Cf",name_ru:"Калифорний",weight:251.0,category:"actinide",config:"[Rn]5f¹⁰7s²",radius:175,en:1.30,density:15.1,melt:900,boil:1472},
-{num:99,sym:"Es",name_ru:"Эйнштейний",weight:252.0,category:"actinide",config:"[Rn]5f¹¹7s²",radius:175,en:1.30,density:8.84,melt:860,boil:996},
-{num:100,sym:"Fm",name_ru:"Фермий",weight:257.0,category:"actinide",config:"[Rn]5f¹²7s²",radius:175,en:1.30,density:null,melt:1527,boil:null},
-{num:101,sym:"Md",name_ru:"Менделевий",weight:258.0,category:"actinide",config:"[Rn]5f¹³7s²",radius:175,en:1.30,density:null,melt:827,boil:null},
-{num:102,sym:"No",name_ru:"Нобелий",weight:259.0,category:"actinide",config:"[Rn]5f¹⁴7s²",radius:175,en:1.30,density:null,melt:827,boil:null},
-{num:103,sym:"Lr",name_ru:"Лауренсий",weight:266.0,category:"actinide",config:"[Rn]5f¹⁴7s²7p¹",radius:175,en:1.30,density:null,melt:1627,boil:null},
-{num:104,sym:"Rf",name_ru:"Резерфордий",weight:267.0,category:"transition-metal",config:"[Rn]5f¹⁴6d²7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:105,sym:"Db",name_ru:"Дубний",weight:268.0,category:"transition-metal",config:"[Rn]5f¹⁴6d³7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:106,sym:"Sg",name_ru:"Сиборгий",weight:269.0,category:"transition-metal",config:"[Rn]5f¹⁴6d⁴7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:107,sym:"Bh",name_ru:"Борий",weight:270.0,category:"transition-metal",config:"[Rn]5f¹⁴6d⁵7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:108,sym:"Hs",name_ru:"Хассий",weight:277.0,category:"transition-metal",config:"[Rn]5f¹⁴6d⁶7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:109,sym:"Mt",name_ru:"Мейтнерий",weight:278.0,category:"unknown",config:"[Rn]5f¹⁴6d⁷7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:110,sym:"Ds",name_ru:"Дармштадтий",weight:281.0,category:"unknown",config:"[Rn]5f¹⁴6d⁸7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:111,sym:"Rg",name_ru:"Рентгений",weight:282.0,category:"unknown",config:"[Rn]5f¹⁴6d⁹7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:112,sym:"Cn",name_ru:"Коперниций",weight:285.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:113,sym:"Nh",name_ru:"Нихоний",weight:286.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²7p¹",radius:160,en:null,density:null,melt:null,boil:null},
-{num:114,sym:"Fl",name_ru:"Флеровий",weight:289.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²7p²",radius:160,en:null,density:null,melt:null,boil:null},
-{num:115,sym:"Mc",name_ru:"Московий",weight:290.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²7p³",radius:160,en:null,density:null,melt:null,boil:null},
-{num:116,sym:"Lv",name_ru:"Ливерморий",weight:293.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²7p⁴",radius:160,en:null,density:null,melt:null,boil:null},
-{num:117,sym:"Ts",name_ru:"Теннессин",weight:294.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²7p⁵",radius:160,en:null,density:null,melt:null,boil:null},
-{num:118,sym:"Og",name_ru:"Оганесон",weight:294.0,category:"unknown",config:"[Rn]5f¹⁴6d¹⁰7s²7p⁶",radius:160,en:null,density:null,melt:null,boil:null}
+{num:1,sym:"H",nm:"Hydrogen",w:1.008,cat:"nonmetal",cfg:"1s1",r:53,en:2.20,d:0.0000899,m:-259.2,b:-252.9},
+{num:2,sym:"He",nm:"Helium",w:4.003,cat:"noble-gas",cfg:"1s2",r:31,en:null,d:0.000179,m:-272.2,b:-268.9},
+{num:3,sym:"Li",nm:"Lithium",w:6.941,cat:"alkali-metal",cfg:"[He]2s1",r:167,en:0.98,d:0.534,m:180.5,b:1342},
+{num:4,sym:"Be",nm:"Beryllium",w:9.012,cat:"alkaline-earth",cfg:"[He]2s2",r:112,en:1.57,d:1.85,m:1287,b:2470},
+{num:5,sym:"B",nm:"Boron",w:10.81,cat:"metalloid",cfg:"[He]2s2 2p1",r:87,en:2.04,d:2.34,m:2076,b:3927},
+{num:6,sym:"C",nm:"Carbon",w:12.01,cat:"nonmetal",cfg:"[He]2s2 2p2",r:77,en:2.55,d:2.27,m:3550,b:4027},
+{num:7,sym:"N",nm:"Nitrogen",w:14.01,cat:"nonmetal",cfg:"[He]2s2 2p3",r:75,en:3.04,d:0.00125,m:-210.0,b:-195.8},
+{num:8,sym:"O",nm:"Oxygen",w:16.00,cat:"nonmetal",cfg:"[He]2s2 2p4",r:73,en:3.44,d:0.00143,m:-218.8,b:-183.0},
+{num:9,sym:"F",nm:"Fluorine",w:19.00,cat:"halogen",cfg:"[He]2s2 2p5",r:71,en:3.98,d:0.0017,m:-219.7,b:-188.1},
+{num:10,sym:"Ne",nm:"Neon",w:20.18,cat:"noble-gas",cfg:"[He]2s2 2p6",r:69,en:null,d:0.0009,m:-248.6,b:-246.1},
+{num:11,sym:"Na",nm:"Sodium",w:22.99,cat:"alkali-metal",cfg:"[Ne]3s1",r:190,en:0.93,d:0.97,m:97.8,b:883},
+{num:12,sym:"Mg",nm:"Magnesium",w:24.31,cat:"alkaline-earth",cfg:"[Ne]3s2",r:145,en:1.31,d:1.74,m:650,b:1091},
+{num:13,sym:"Al",nm:"Aluminium",w:26.98,cat:"basic-metal",cfg:"[Ne]3s2 3p1",r:118,en:1.61,d:2.70,m:660.3,b:2519},
+{num:14,sym:"Si",nm:"Silicon",w:28.09,cat:"metalloid",cfg:"[Ne]3s2 3p2",r:111,en:1.90,d:2.33,m:1414,b:3265},
+{num:15,sym:"P",nm:"Phosphorus",w:30.97,cat:"nonmetal",cfg:"[Ne]3s2 3p3",r:98,en:2.19,d:1.82,m:44.2,b:280.5},
+{num:16,sym:"S",nm:"Sulfur",w:32.07,cat:"nonmetal",cfg:"[Ne]3s2 3p4",r:88,en:2.58,d:2.07,m:115.2,b:444.7},
+{num:17,sym:"Cl",nm:"Chlorine",w:35.45,cat:"halogen",cfg:"[Ne]3s2 3p5",r:79,en:3.16,d:0.0032,m:-101.5,b:-34.0},
+{num:18,sym:"Ar",nm:"Argon",w:39.95,cat:"noble-gas",cfg:"[Ne]3s2 3p6",r:71,en:null,d:0.0018,m:-189.3,b:-185.8},
+{num:19,sym:"K",nm:"Potassium",w:39.10,cat:"alkali-metal",cfg:"[Ar]4s1",r:243,en:0.82,d:0.86,m:63.4,b:759},
+{num:20,sym:"Ca",nm:"Calcium",w:40.08,cat:"alkaline-earth",cfg:"[Ar]4s2",r:194,en:1.00,d:1.55,m:842,b:1484},
+{num:21,sym:"Sc",nm:"Scandium",w:44.96,cat:"transition-metal",cfg:"[Ar]3d1 4s2",r:184,en:1.36,d:2.99,m:1541,b:2836},
+{num:22,sym:"Ti",nm:"Titanium",w:47.87,cat:"transition-metal",cfg:"[Ar]3d2 4s2",r:176,en:1.54,d:4.51,m:1668,b:3287},
+{num:23,sym:"V",nm:"Vanadium",w:50.94,cat:"transition-metal",cfg:"[Ar]3d3 4s2",r:171,en:1.63,d:6.11,m:1910,b:3407},
+{num:24,sym:"Cr",nm:"Chromium",w:52.00,cat:"transition-metal",cfg:"[Ar]3d5 4s1",r:166,en:1.66,d:7.19,m:1907,b:2671},
+{num:25,sym:"Mn",nm:"Manganese",w:54.94,cat:"transition-metal",cfg:"[Ar]3d5 4s2",r:161,en:1.55,d:7.43,m:1246,b:2061},
+{num:26,sym:"Fe",nm:"Iron",w:55.85,cat:"transition-metal",cfg:"[Ar]3d6 4s2",r:156,en:1.83,d:7.87,m:1538,b:2862},
+{num:27,sym:"Co",nm:"Cobalt",w:58.93,cat:"transition-metal",cfg:"[Ar]3d7 4s2",r:152,en:1.88,d:8.90,m:1495,b:2927},
+{num:28,sym:"Ni",nm:"Nickel",w:58.69,cat:"transition-metal",cfg:"[Ar]3d8 4s2",r:149,en:1.91,d:8.91,m:1455,b:2913},
+{num:29,sym:"Cu",nm:"Copper",w:63.55,cat:"transition-metal",cfg:"[Ar]3d10 4s1",r:145,en:1.90,d:8.96,m:1085,b:2562},
+{num:30,sym:"Zn",nm:"Zinc",w:65.38,cat:"transition-metal",cfg:"[Ar]3d10 4s2",r:142,en:1.65,d:7.14,m:419.5,b:907},
+{num:31,sym:"Ga",nm:"Gallium",w:69.72,cat:"basic-metal",cfg:"[Ar]3d10 4s2 4p1",r:136,en:1.81,d:5.91,m:29.8,b:2204},
+{num:32,sym:"Ge",nm:"Germanium",w:72.63,cat:"metalloid",cfg:"[Ar]3d10 4s2 4p2",r:125,en:2.01,d:5.32,m:938.3,b:2833},
+{num:33,sym:"As",nm:"Arsenic",w:74.92,cat:"metalloid",cfg:"[Ar]3d10 4s2 4p3",r:114,en:2.18,d:5.73,m:817,b:614},
+{num:34,sym:"Se",nm:"Selenium",w:78.97,cat:"nonmetal",cfg:"[Ar]3d10 4s2 4p4",r:103,en:2.55,d:4.81,m:221,b:685},
+{num:35,sym:"Br",nm:"Bromine",w:79.90,cat:"halogen",cfg:"[Ar]3d10 4s2 4p5",r:94,en:2.96,d:3.12,m:-7.2,b:59},
+{num:36,sym:"Kr",nm:"Krypton",w:83.80,cat:"noble-gas",cfg:"[Ar]3d10 4s2 4p6",r:88,en:3.00,d:0.0037,m:-157.4,b:-153.2},
+{num:37,sym:"Rb",nm:"Rubidium",w:85.47,cat:"alkali-metal",cfg:"[Kr]5s1",r:265,en:0.82,d:1.53,m:39.3,b:688},
+{num:38,sym:"Sr",nm:"Strontium",w:87.62,cat:"alkaline-earth",cfg:"[Kr]5s2",r:219,en:0.95,d:2.63,m:777,b:1382},
+{num:39,sym:"Y",nm:"Yttrium",w:88.91,cat:"transition-metal",cfg:"[Kr]4d1 5s2",r:212,en:1.22,d:4.47,m:1526,b:3345},
+{num:40,sym:"Zr",nm:"Zirconium",w:91.22,cat:"transition-metal",cfg:"[Kr]4d2 5s2",r:206,en:1.33,d:6.51,m:1855,b:4409},
+{num:41,sym:"Nb",nm:"Niobium",w:92.91,cat:"transition-metal",cfg:"[Kr]4d4 5s1",r:198,en:1.60,d:8.57,m:2477,b:4744},
+{num:42,sym:"Mo",nm:"Molybdenum",w:95.95,cat:"transition-metal",cfg:"[Kr]4d5 5s1",r:190,en:2.16,d:10.22,m:2623,b:4639},
+{num:43,sym:"Tc",nm:"Technetium",w:98.00,cat:"transition-metal",cfg:"[Kr]4d5 5s2",r:183,en:1.90,d:11.5,m:2157,b:4265},
+{num:44,sym:"Ru",nm:"Ruthenium",w:101.1,cat:"transition-metal",cfg:"[Kr]4d7 5s1",r:178,en:2.20,d:12.37,m:2334,b:4150},
+{num:45,sym:"Rh",nm:"Rhodium",w:102.9,cat:"transition-metal",cfg:"[Kr]4d8 5s1",r:173,en:2.28,d:12.41,m:1964,b:3695},
+{num:46,sym:"Pd",nm:"Palladium",w:106.4,cat:"transition-metal",cfg:"[Kr]4d10",r:169,en:2.20,d:12.02,m:1555,b:2963},
+{num:47,sym:"Ag",nm:"Silver",w:107.9,cat:"transition-metal",cfg:"[Kr]4d10 5s1",r:165,en:1.93,d:10.49,m:961.8,b:2162},
+{num:48,sym:"Cd",nm:"Cadmium",w:112.4,cat:"transition-metal",cfg:"[Kr]4d10 5s2",r:161,en:1.69,d:8.65,m:321.1,b:767},
+{num:49,sym:"In",nm:"Indium",w:114.8,cat:"basic-metal",cfg:"[Kr]4d10 5s2 5p1",r:156,en:1.78,d:7.31,m:156.6,b:2072},
+{num:50,sym:"Sn",nm:"Tin",w:118.7,cat:"basic-metal",cfg:"[Kr]4d10 5s2 5p2",r:145,en:1.96,d:7.29,m:231.9,b:2602},
+{num:51,sym:"Sb",nm:"Antimony",w:121.8,cat:"metalloid",cfg:"[Kr]4d10 5s2 5p3",r:133,en:2.05,d:6.69,m:630.6,b:1587},
+{num:52,sym:"Te",nm:"Tellurium",w:127.6,cat:"metalloid",cfg:"[Kr]4d10 5s2 5p4",r:123,en:2.10,d:6.24,m:449.5,b:988},
+{num:53,sym:"I",nm:"Iodine",w:126.9,cat:"halogen",cfg:"[Kr]4d10 5s2 5p5",r:115,en:2.66,d:4.93,m:113.7,b:184.3},
+{num:54,sym:"Xe",nm:"Xenon",w:131.3,cat:"noble-gas",cfg:"[Kr]4d10 5s2 5p6",r:108,en:2.60,d:0.0059,m:-111.8,b:-108.1},
+{num:55,sym:"Cs",nm:"Caesium",w:132.9,cat:"alkali-metal",cfg:"[Xe]6s1",r:298,en:0.79,d:1.87,m:28.4,b:671},
+{num:56,sym:"Ba",nm:"Barium",w:137.3,cat:"alkaline-earth",cfg:"[Xe]6s2",r:253,en:0.89,d:3.59,m:727,b:1897},
+{num:57,sym:"La",nm:"Lanthanum",w:138.9,cat:"lanthanide",cfg:"[Xe]5d1 6s2",r:195,en:1.10,d:6.15,m:920,b:3464},
+{num:58,sym:"Ce",nm:"Cerium",w:140.1,cat:"lanthanide",cfg:"[Xe]4f1 5d1 6s2",r:185,en:1.12,d:6.77,m:795,b:3443},
+{num:59,sym:"Pr",nm:"Praseodymium",w:140.9,cat:"lanthanide",cfg:"[Xe]4f3 6s2",r:185,en:1.13,d:6.77,m:931,b:3520},
+{num:60,sym:"Nd",nm:"Neodymium",w:144.2,cat:"lanthanide",cfg:"[Xe]4f4 6s2",r:185,en:1.14,d:7.01,m:1024,b:3074},
+{num:61,sym:"Pm",nm:"Promethium",w:145.0,cat:"lanthanide",cfg:"[Xe]4f5 6s2",r:185,en:1.13,d:7.26,m:1042,b:3000},
+{num:62,sym:"Sm",nm:"Samarium",w:150.4,cat:"lanthanide",cfg:"[Xe]4f6 6s2",r:185,en:1.17,d:7.52,m:1072,b:1794},
+{num:63,sym:"Eu",nm:"Europium",w:152.0,cat:"lanthanide",cfg:"[Xe]4f7 6s2",r:185,en:1.20,d:5.24,m:822,b:1529},
+{num:64,sym:"Gd",nm:"Gadolinium",w:157.3,cat:"lanthanide",cfg:"[Xe]4f7 5d1 6s2",r:185,en:1.20,d:7.90,m:1313,b:3273},
+{num:65,sym:"Tb",nm:"Terbium",w:158.9,cat:"lanthanide",cfg:"[Xe]4f9 6s2",r:185,en:1.22,d:8.23,m:1356,b:3230},
+{num:66,sym:"Dy",nm:"Dysprosium",w:162.5,cat:"lanthanide",cfg:"[Xe]4f10 6s2",r:185,en:1.23,d:8.55,m:1412,b:2567},
+{num:67,sym:"Ho",nm:"Holmium",w:164.9,cat:"lanthanide",cfg:"[Xe]4f11 6s2",r:185,en:1.24,d:8.80,m:1474,b:2700},
+{num:68,sym:"Er",nm:"Erbium",w:167.3,cat:"lanthanide",cfg:"[Xe]4f12 6s2",r:185,en:1.24,d:9.07,m:1529,b:2868},
+{num:69,sym:"Tm",nm:"Thulium",w:168.9,cat:"lanthanide",cfg:"[Xe]4f13 6s2",r:185,en:1.25,d:9.32,m:1545,b:1950},
+{num:70,sym:"Yb",nm:"Ytterbium",w:173.0,cat:"lanthanide",cfg:"[Xe]4f14 6s2",r:185,en:1.10,d:6.97,m:824,b:1196},
+{num:71,sym:"Lu",nm:"Lutetium",w:175.0,cat:"lanthanide",cfg:"[Xe]4f14 5d1 6s2",r:185,en:1.27,d:9.84,m:1663,b:3402},
+{num:72,sym:"Hf",nm:"Hafnium",w:178.5,cat:"transition-metal",cfg:"[Xe]4f14 5d2 6s2",r:175,en:1.30,d:13.31,m:2233,b:4603},
+{num:73,sym:"Ta",nm:"Tantalum",w:180.9,cat:"transition-metal",cfg:"[Xe]4f14 5d3 6s2",r:170,en:1.50,d:16.65,m:3017,b:5458},
+{num:74,sym:"W",nm:"Tungsten",w:183.8,cat:"transition-metal",cfg:"[Xe]4f14 5d4 6s2",r:165,en:2.36,d:19.25,m:3422,b:5555},
+{num:75,sym:"Re",nm:"Rhenium",w:186.2,cat:"transition-metal",cfg:"[Xe]4f14 5d5 6s2",r:160,en:1.90,d:21.02,m:3186,b:5596},
+{num:76,sym:"Os",nm:"Osmium",w:190.2,cat:"transition-metal",cfg:"[Xe]4f14 5d6 6s2",r:155,en:2.20,d:22.59,m:3033,b:5012},
+{num:77,sym:"Ir",nm:"Iridium",w:192.2,cat:"transition-metal",cfg:"[Xe]4f14 5d7 6s2",r:150,en:2.20,d:22.56,m:2446,b:4428},
+{num:78,sym:"Pt",nm:"Platinum",w:195.1,cat:"transition-metal",cfg:"[Xe]4f14 5d9 6s1",r:150,en:2.28,d:21.46,m:1768,b:3825},
+{num:79,sym:"Au",nm:"Gold",w:197.0,cat:"transition-metal",cfg:"[Xe]4f14 5d10 6s1",r:150,en:2.54,d:19.30,m:1064,b:2856},
+{num:80,sym:"Hg",nm:"Mercury",w:200.6,cat:"transition-metal",cfg:"[Xe]4f14 5d10 6s2",r:150,en:2.00,d:13.53,m:-38.8,b:356.7},
+{num:81,sym:"Tl",nm:"Thallium",w:204.4,cat:"basic-metal",cfg:"[Xe]4f14 5d10 6s2 6p1",r:150,en:1.62,d:11.85,m:304,b:1473},
+{num:82,sym:"Pb",nm:"Lead",w:207.2,cat:"basic-metal",cfg:"[Xe]4f14 5d10 6s2 6p2",r:150,en:1.87,d:11.34,m:327.5,b:1749},
+{num:83,sym:"Bi",nm:"Bismuth",w:209.0,cat:"basic-metal",cfg:"[Xe]4f14 5d10 6s2 6p3",r:150,en:2.02,d:9.75,m:271.4,b:1564},
+{num:84,sym:"Po",nm:"Polonium",w:209.0,cat:"metalloid",cfg:"[Xe]4f14 5d10 6s2 6p4",r:150,en:2.00,d:9.20,m:254,b:962},
+{num:85,sym:"At",nm:"Astatine",w:210.0,cat:"halogen",cfg:"[Xe]4f14 5d10 6s2 6p5",r:150,en:2.20,d:7.00,m:302,b:337},
+{num:86,sym:"Rn",nm:"Radon",w:222.0,cat:"noble-gas",cfg:"[Xe]4f14 5d10 6s2 6p6",r:150,en:null,d:0.0097,m:-71,b:-61.7},
+{num:87,sym:"Fr",nm:"Francium",w:223.0,cat:"alkali-metal",cfg:"[Rn]7s1",r:260,en:0.70,d:1.87,m:27,b:677},
+{num:88,sym:"Ra",nm:"Radium",w:226.0,cat:"alkaline-earth",cfg:"[Rn]7s2",r:221,en:0.90,d:5.50,m:696,b:1737},
+{num:89,sym:"Ac",nm:"Actinium",w:227.0,cat:"actinide",cfg:"[Rn]6d1 7s2",r:195,en:1.10,d:10.07,m:1050,b:3198},
+{num:90,sym:"Th",nm:"Thorium",w:232.0,cat:"actinide",cfg:"[Rn]6d2 7s2",r:180,en:1.30,d:11.72,m:1750,b:4788},
+{num:91,sym:"Pa",nm:"Protactinium",w:231.0,cat:"actinide",cfg:"[Rn]5f2 6d1 7s2",r:180,en:1.50,d:15.37,m:1572,b:4027},
+{num:92,sym:"U",nm:"Uranium",w:238.0,cat:"actinide",cfg:"[Rn]5f3 6d1 7s2",r:175,en:1.38,d:18.95,m:1135,b:4131},
+{num:93,sym:"Np",nm:"Neptunium",w:237.0,cat:"actinide",cfg:"[Rn]5f4 6d1 7s2",r:175,en:1.36,d:20.45,m:644,b:3902},
+{num:94,sym:"Pu",nm:"Plutonium",w:244.0,cat:"actinide",cfg:"[Rn]5f6 7s2",r:175,en:1.28,d:19.82,m:640,b:3228},
+{num:95,sym:"Am",nm:"Americium",w:243.0,cat:"actinide",cfg:"[Rn]5f7 7s2",r:175,en:1.13,d:13.69,m:1176,b:2011},
+{num:96,sym:"Cm",nm:"Curium",w:247.0,cat:"actinide",cfg:"[Rn]5f7 6d1 7s2",r:175,en:1.28,d:13.51,m:1345,b:3110},
+{num:97,sym:"Bk",nm:"Berkelium",w:247.0,cat:"actinide",cfg:"[Rn]5f9 7s2",r:175,en:1.30,d:14.79,m:1050,b:2627},
+{num:98,sym:"Cf",nm:"Californium",w:251.0,cat:"actinide",cfg:"[Rn]5f10 7s2",r:175,en:1.30,d:15.1,m:900,b:1472},
+{num:99,sym:"Es",nm:"Einsteinium",w:252.0,cat:"actinide",cfg:"[Rn]5f11 7s2",r:175,en:1.30,d:8.84,m:860,b:996},
+{num:100,sym:"Fm",nm:"Fermium",w:257.0,cat:"actinide",cfg:"[Rn]5f12 7s2",r:175,en:1.30,d:null,m:1527,b:null},
+{num:101,sym:"Md",nm:"Mendelevium",w:258.0,cat:"actinide",cfg:"[Rn]5f13 7s2",r:175,en:1.30,d:null,m:827,b:null},
+{num:102,sym:"No",nm:"Nobelium",w:259.0,cat:"actinide",cfg:"[Rn]5f14 7s2",r:175,en:1.30,d:null,m:827,b:null},
+{num:103,sym:"Lr",nm:"Lawrencium",w:266.0,cat:"actinide",cfg:"[Rn]5f14 6d1 7s2 7p1",r:175,en:1.30,d:null,m:1627,b:null},
+{num:104,sym:"Rf",nm:"Rutherfordium",w:267.0,cat:"transition-metal",cfg:"[Rn]5f14 6d2 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:105,sym:"Db",nm:"Dubnium",w:268.0,cat:"transition-metal",cfg:"[Rn]5f14 6d3 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:106,sym:"Sg",nm:"Seaborgium",w:269.0,cat:"transition-metal",cfg:"[Rn]5f14 6d4 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:107,sym:"Bh",nm:"Bohrium",w:270.0,cat:"transition-metal",cfg:"[Rn]5f14 6d5 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:108,sym:"Hs",nm:"Hassium",w:277.0,cat:"transition-metal",cfg:"[Rn]5f14 6d6 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:109,sym:"Mt",nm:"Meitnerium",w:278.0,cat:"unknown",cfg:"[Rn]5f14 6d7 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:110,sym:"Ds",nm:"Darmstadtium",w:281.0,cat:"unknown",cfg:"[Rn]5f14 6d8 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:111,sym:"Rg",nm:"Roentgenium",w:282.0,cat:"unknown",cfg:"[Rn]5f14 6d9 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:112,sym:"Cn",nm:"Copernicium",w:285.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2",r:160,en:null,d:null,m:null,b:null},
+{num:113,sym:"Nh",nm:"Nihonium",w:286.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2 7p1",r:160,en:null,d:null,m:null,b:null},
+{num:114,sym:"Fl",nm:"Flerovium",w:289.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2 7p2",r:160,en:null,d:null,m:null,b:null},
+{num:115,sym:"Mc",nm:"Moscovium",w:290.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2 7p3",r:160,en:null,d:null,m:null,b:null},
+{num:116,sym:"Lv",nm:"Livermorium",w:293.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2 7p4",r:160,en:null,d:null,m:null,b:null},
+{num:117,sym:"Ts",nm:"Tennessine",w:294.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2 7p5",r:160,en:null,d:null,m:null,b:null},
+{num:118,sym:"Og",nm:"Oganesson",w:294.0,cat:"unknown",cfg:"[Rn]5f14 6d10 7s2 7p6",r:160,en:null,d:null,m:null,b:null}
 ];
 
 var LAYOUT = [
@@ -259,22 +259,21 @@ function buildTable(){
       var el=getEl(cell);
       if(!el){ tr.appendChild(createCell("empty")); continue; }
       var td=document.createElement("td");
-      td.className=el.category||"unknown";
+      td.className=el.cat||"unknown";
       if(isState){
         var s="unknown";
-        if(el.melt!==undefined&&el.boil!==undefined) s=(curTemp<el.melt)?"solid":(curTemp<el.boil)?"liquid":"gas";
+        if(el.m!==undefined&&el.b!==undefined) s=(curTemp<el.m)?"solid":(curTemp<el.b)?"liquid":"gas";
         td.style.opacity=(s==="solid")?1:(s==="liquid")?0.65:(s==="gas")?0.35:0.25;
       } else if(!showConfig && el[prop]!==undefined && el[prop]!=="unknown" && typeof el[prop]==="number"){
         var vals=[];
         for(var i=0;i<ELEMENTS.length;i++) if(typeof ELEMENTS[i][prop]==="number") vals.push(ELEMENTS[i][prop]);
         var mn=Math.min.apply(null,vals), mx=Math.max.apply(null,vals);
         var ratio=(el[prop]-mn)/(mx-mn||1);
-        var red=Math.round(ratio*180+40), green=Math.round((1-ratio)*120+80), blue=Math.round((1-ratio)*180+40);
-        td.style.background="rgb("+red+","+green+","+blue+")";
+        td.style.background="rgb("+[Math.round(ratio*180+40),Math.round((1-ratio)*120+80),Math.round((1-ratio)*180+40)].join(",")+")";
       }
       var html='<span class="num">'+el.num+'</span><span class="sym">'+el.sym+'</span>';
-      if(showNames) html+='<span class="nm">'+el.name_ru+'</span>';
-      else if(showConfig) html+='<span class="wt" style="font-size:.52em">'+el.config+'</span>';
+      if(showNames) html+='<span class="nm">'+el.nm+'</span>';
+      else if(showConfig) html+='<span class="wt" style="font-size:.52em">'+el.cfg+'</span>';
       else html+='<span class="wt">'+(el[prop]!==undefined&&el[prop]!=="unknown"?(typeof el[prop]==="number"?el[prop].toFixed(1):el[prop]):"—")+'</span>';
       td.innerHTML=html;
       (function(el){ td.onmouseenter=function(){ showDetail(el); }; })(el);
@@ -286,29 +285,29 @@ function buildTable(){
   box.appendChild(table);
 }
 
-function createCell(cls){ var td=document.createElement("td"); td.className=cls||""; return td; }
+function createCell(cls){ var td=document.createElement("td"); if(cls) td.className=cls; return td; }
 
 function showDetail(el){
   var d=document.getElementById("detail");
   var s="unknown";
-  if(el.melt!==undefined&&el.boil!==undefined) s=(curTemp<el.melt)?"solid":(curTemp<el.boil)?"liquid":"gas";
-  var sRus={solid:"Твёрдый",liquid:"Жидкий",gas:"Газ",unknown:"Неизвестен"}[s];
-  var catRus={"alkali-metal":"Щелочной","alkaline-earth":"Щел-земельный","transition-metal":"Переходный","basic-metal":"Постпереходный","metalloid":"Металлоид","nonmetal":"Неметалл","halogen":"Галоген","noble-gas":"Инертный","lanthanide":"Лантаноид","actinide":"Актиноид","unknown":"Неизвестен"}[el.category]||el.category;
-  d.innerHTML='<h2>'+el.sym+' — '+el.name_ru+'</h2>'
-    +'<p><b>No:</b> '+el.num+'</p>'
-    +'<p><b>Тип:</b> '+catRus+'</p>'
-    +'<p><b>Масса:</b> '+el.weight+'</p>'
-    +'<p><b>Конф:</b> '+el.config+'</p>'
-    +(el.en!==null?'<p><b>ЭО:</b> '+el.en+'</p>':'')
-    +(el.radius?'<p><b>Радиус:</b> '+el.radius+' пм</p>':'')
-    +(el.density?'<p><b>ρ:</b> '+el.density+' г/см³</p>':'')
-    +'<p><b>Tпл:</b> '+el.melt+'°C | <b>Tкип:</b> '+el.boil+'°C</p>'
-    +'<p><b>При '+curTemp+'°C:</b> '+sRus+'</p>';
+  if(el.m!==undefined&&el.b!==undefined) s=(curTemp<el.m)?"solid":(curTemp<el.b)?"liquid":"gas";
+  var sRus={solid:"Solid",liquid:"Liquid",gas:"Gas",unknown:"Unknown"}[s];
+  var catRus={"alkali-metal":"Alkali metal","alkaline-earth":"Alkaline earth","transition-metal":"Transition metal","basic-metal":"Basic metal","metalloid":"Metalloid","nonmetal":"Nonmetal","halogen":"Halogen","noble-gas":"Noble gas","lanthanide":"Lanthanide","actinide":"Actinide","unknown":"Unknown"}[el.cat]||el.cat;
+  d.innerHTML='<h2>'+el.sym+' — '+el.nm+'</h2>'
+    +'<p><b>#</b> '+el.num+'</p>'
+    +'<p><b>Type:</b> '+catRus+'</p>'
+    +'<p><b>Weight:</b> '+el.w+'</p>'
+    +'<p><b>Config:</b> '+el.cfg+'</p>'
+    +(el.en!=null?'<p><b>EN:</b> '+el.en+'</p>':'')
+    +(el.r?'<p><b>Radius:</b> '+el.r+' pm</p>':'')
+    +(el.d?'<p><b>Density:</b> '+el.d+' g/cm3</p>':'')
+    +'<p><b>Melt:</b> '+el.m+'C | <b>Boil:</b> '+el.b+'C</p>'
+    +'<p><b>At '+curTemp+'C:</b> '+sRus+'</p>';
 }
 
 document.getElementById("btnDark").onclick=function(){
   document.body.classList.toggle("dark");
-  this.textContent=document.body.classList.contains("dark")?"☀️":"🌙";
+  this.innerHTML=document.body.classList.contains("dark")?"&#9728;":"&#127769;";
 };
 document.getElementById("btnSimple").onclick=function(){ showNames=false;showConfig=false; setActive("btnSimple"); buildTable(); };
 document.getElementById("btnNames").onclick=function(){ showNames=true;showConfig=false; setActive("btnNames"); buildTable(); };
@@ -323,7 +322,7 @@ document.getElementById("propSelect").onchange=function(){
 };
 document.getElementById("tempSlider").oninput=function(){
   curTemp=+this.value;
-  document.getElementById("tempLabel").textContent=curTemp+"°C";
+  document.getElementById("tempLabel").textContent=curTemp+"C";
   buildTable();
   var h2=document.querySelector("#detail h2");
   if(h2){ var n=+(h2.textContent.match(/\d+/)||[1])[0]; showDetail(getEl(n)); }
