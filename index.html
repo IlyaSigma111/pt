@@ -3,47 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Таблица Менделеева — Интерактивная</title>
+<title>Таблица Менделеева</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
   <header>
-    <div class="header-top">
-      <h1>Периодическая таблица элементов</h1>
-      <button id="darkMode" title="Тёмная тема">🌙</button>
-    </div>
-    <div class="controls">
+    <h1>ПЕРИОДИЧЕСКАЯ ТАБЛИЦА ЭЛЕМЕНТОВ</h1>
+    <div class="toolbar">
       <div class="view-btns">
-        <button id="simpleView" class="active">Простой</button>
-        <button id="namesView">Названия</button>
-        <button id="configView">Эл. конфиг</button>
+        <button id="btnSimple" class="active">Простая</button>
+        <button id="btnNames">Названия</button>
+        <button id="btnConfig">Конфигурация</button>
       </div>
-      <select id="propertySelect">
+      <select id="propSelect">
         <option value="weight">Атомная масса</option>
-        <option value="radius">Атомный радиус</option>
-        <option value="electronegativity">Электроотрицательность</option>
+        <option value="radius">Радиус</option>
+        <option value="en">ЭО</option>
         <option value="density">Плотность</option>
-        <option value="melting">Темп. плавления</option>
-        <option value="boiling">Темп. кипения</option>
-        <option value="state">Состояние (темп)</option>
+        <option value="melt">T° плавл.</option>
+        <option value="boil">T° кип.</option>
+        <option value="state">Состояние</option>
       </select>
-      <div class="temp-slider" style="display:none">
-        <label>Т°C: <span id="tempValue">25</span></label>
-        <input type="range" id="tempSlider" min="-273" max="5000" value="25">
+      <div class="temp-wrap" id="tempWrap" style="display:none">
+        <span id="tempLabel">25°C</span>
+        <input type="range" id="tempSlider" min="-273" max="3000" value="25">
       </div>
+      <button id="btnDark" title="Тёмная тема">🌙</button>
     </div>
   </header>
-  <div class="main-content">
-    <div class="table-wrap" id="tableContainer"></div>
-    <aside class="sidebar" id="sidebar">
-      <div class="element-detail" id="elementDetail">
-        <p class="hint">Наведи на элемент</p>
-      </div>
-    </aside>
+  <div class="content">
+    <div id="tableBox"></div>
+    <div id="sidePanel">
+      <div id="detail"><p class="muted">Наведи на элемент</p></div>
+    </div>
   </div>
 </div>
-<script src="elements-data.js"></script>
-<script src="script.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
